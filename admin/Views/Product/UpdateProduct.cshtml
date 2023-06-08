@@ -1,0 +1,142 @@
+﻿@using entity.Models
+@using services.Abstract
+@model Product
+@inject IDatabaseService _ids
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!--page-wrapper-->
+<div class="page-wrapper">
+    <!--page-content-wrapper-->
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3">Ürün Güncelle</div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Ürün Güncelleme Sayfası</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="card radius-15">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h4 class="mb-0">Ürün Güncelleme Girişi</h4>
+                    </div>
+                    <hr />
+                     
+                    <form class="needs-validation" novalidate method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Ürün Adı</label>
+                                <input type="text" asp-for="ProductName" class="form-control" id="validationCustom01" required>
+                                <div class="valid-feedback">Looks good!</div>
+
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">Ürün Kategorisi - <a href="/">(Yeni Ürün Kategorisi Eklemek İçin Tıklayınız)</a></label>
+                                <input type="text" asp-for="ProductCategory" class="form-control" id="validationCustom02" required>
+                                <div class="valid-feedback">Looks good!</div>
+
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom03">Ürün Fiyatı</label>
+                                <input type="text" asp-for="ProductPrice" class="form-control" id="validationCustom03" required>
+                                <div class="valid-feedback">Looks good!</div>
+
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom04">Ürün Rengi - <a href="/">(Yeni Ürün Rengi Eklemek İçin Tıklayınız)</a></label>
+                                <select class="custom-select" asp-for="ProductColor" id="validationCustom04" required>
+                                    <option selected disabled value="">Seçiniz...</option>
+                                    <option>Sarı</option>
+                                    <option>Kırmızı</option>
+                                    <option>Mavi</option>
+                                    <option>Siyah</option>
+                                    <option>Yeşil</option>
+                                </select>
+                                <div class="valid-feedback">Looks good!</div>
+
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom05">Ürün Boyutu</label>
+                                <input type="text" asp-for="ProductSize" class="form-control" id="validationCustom05" required>
+                                <div class="valid-feedback">Looks good!</div>
+
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        
+                        <label>Ürün Açıklaması</label>
+                        <textarea id="mytextarea" asp-for="ProductDescription" required></textarea>
+                        
+                        <hr />
+                        
+                        
+                        <div class="card radius-15">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h4 class="mb-0">Resim Yükle</h4>
+                                </div>
+                                <hr />
+                                <input id="imageFile" type="file" size="1" multiple/>
+                                
+                                    <input id="image-uploadify" type="file" accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf" formenctype="multipart/form-data" multiple>
+                                
+                            </div>
+                        </div>
+                        <hr />
+
+
+
+                        <button class="btn btn-primary" type="submit">Güncelle</button>
+                    
+                    </form>
+                    
+                    <script>
+                        // Example starter JavaScript for disabling form submissions if there are invalid fields
+                        (function() {
+                            'use strict';
+                            window.addEventListener('load', function() {
+                                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                var forms = document.getElementsByClassName('needs-validation');
+                                // Loop over them and prevent submission
+                                var validation = Array.prototype.filter.call(forms, function(form) {
+                                    form.addEventListener('submit', function(event) {
+                                        if (form.checkValidity() === false) {
+                                            event.preventDefault();
+                                            event.stopPropagation();
+                                        }
+                                        form.classList.add('was-validated');
+                                    }, false);
+                                });
+                            }, false);
+                        })();
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end page-content-wrapper-->
+</div>
+<!--end page-wrapper-->
+<!--start overlay-->
+<div class="overlay toggle-btn-mobile"></div>
+<!--end overlay-->
+<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+<!--End Back To Top Button-->

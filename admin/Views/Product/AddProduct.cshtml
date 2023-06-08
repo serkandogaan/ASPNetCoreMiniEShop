@@ -1,0 +1,129 @@
+﻿@using services.Abstract
+@inject IDatabaseService _ids
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<head>
+    <title>asdasd</title>
+</head>
+<!--page-wrapper-->
+<div class="page-wrapper">
+    <!--page-content-wrapper-->
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3">Ürün Ekle</div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Ürün Ekleme Sayfası</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="card radius-15">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h4 class="mb-0">Ürün Bilgi Girişi</h4>
+                    </div>
+                    <hr />
+
+                    <form class="needs-validation" novalidate method="post">
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Ürün Adı</label>
+                                <input type="text" class="form-control" id="validationCustom01" required>
+                                @*                                <div class="valid-feedback">Looks good!</div>*@
+
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">Ürün Kategorisi - <a href="/">(Yeni Ürün Kategorisi Eklemek İçin Tıklayınız)</a></label>
+                                <select class="single-select" id="validationCustom02" required>
+									@foreach (var ProductCategorys in _ids.ProductCategoryService.GetAll())
+                                    {
+                                        <option value="@ProductCategorys.ProductCategoryName">@ProductCategorys.ProductCategoryName</option>
+                                    }								
+								</select>
+
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom03">Ürün Fiyatı</label>
+                                <input type="text" class="form-control" id="validationCustom03" required>
+
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom04">Ürün Rengi - <a href="/">(Yeni Ürün Rengi Eklemek İçin Tıklayınız)</a></label>
+								<select class="multiple-select" id="validationCustom04" required multiple="multiple">	
+                                    @foreach (var Colors in _ids.ColorService.GetAll())
+                                    {
+                                        <option value="@Colors.Color1">@Colors.Color1</option>
+                                    }
+								</select>                              
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom05">Ürün Boyutu - <a href="/">(Yeni Ürün Boyutu Eklemek İçin Tıklayınız)</a></label>
+								<select class="multiple-select" id="validationCustom05" required multiple="multiple">	
+                                    @foreach (var Sizes in _ids.SizeService.GetAll())
+                                    {
+                                        <option value="@Sizes.Size1">@Sizes.Size1</option>
+                                    }
+								</select>
+
+                            </div>
+                        </div>
+
+                        <hr />
+
+
+                        <label>Ürün Açıklaması</label>
+                        <textarea id="mytextarea" required></textarea>
+
+
+                        <hr />
+
+
+                        <div class="card radius-15">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h4 class="mb-0">Resim Yükle</h4>
+                                </div>
+                                <hr />
+                                <input id="imageFile" class="image-uploadify" type="file" size="1" multiple/>
+
+                                <input id="image-uploadify" type="file" accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf" formenctype="multipart/form-data" multiple>
+
+                            </div>
+                        </div>
+                        <hr />
+
+
+
+                        <button class="btn btn-primary" id="AddProduct" type="submit">Ürün Ekle</button>
+
+                    </form>
+
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end page-content-wrapper-->
+</div>
+<!--end page-wrapper-->
+<!--start overlay-->
+<div class="overlay toggle-btn-mobile"></div>
+<!--end overlay-->
+<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+<!--End Back To Top Button-->

@@ -1,0 +1,204 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@using entity.Models
+@using services.Abstract
+@inject IDatabaseService _ids
+@model IPagedList<Product>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="#">Home</a>
+                <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                <span class="breadcrumb-item active">Shop List</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Shop Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-4">
+            <!-- Price Start -->
+            <form id="form" asp-action="Product" method="get" data-ajax="true" data-ajax-method="get" data-ajax-update="#panel" data-ajax-mode='replace' data-ajax-url="@Url.Action("ProductFilter","Home")">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Fiyata Göre Filtrele</span></h5>
+                <div class="bg-light p-4 mb-30">
+                    @*<form method="get">*@
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="filterprice" class="custom-control-input" id="price-1" value="100">
+                        <label class="custom-control-label" for="price-1">100 ₺</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="filterprice" class="custom-control-input" id="price-2" value="200">
+                        <label class="custom-control-label" for="price-2">200 ₺</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="filterprice" class="custom-control-input" id="price-3" value="300">
+                        <label class="custom-control-label" for="price-3">300 ₺</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="filterprice" class="custom-control-input" id="price-4" value="400">
+                        <label class="custom-control-label" for="price-4">400 ₺</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="filterprice" class="custom-control-input" id="price-5" value="500">
+                        <label class="custom-control-label" for="price-5">500 ₺</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="filterprice" class="custom-control-input" id="price-6" value="750">
+                        <label class="custom-control-label" for="price-6">750 ₺</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="filterprice" class="custom-control-input" id="price-7" value="1000">
+                        <label class="custom-control-label" for="price-7">1000 ₺</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="filterprice" class="custom-control-input" id="price-8" value="1500">
+                        <label class="custom-control-label" for="price-8">1500 ₺</label>
+                    </div>
+
+                    @*</form>*@
+                </div>
+                <!-- Price End -->
+                <!-- Color Start -->
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Renge Göre Filtrele</span></h5>
+                <div class="bg-light p-4 mb-30">
+                    @*<form method="get">*@
+                    @foreach (var ProductColors in _ids.ColorService.GetAll().OrderBy(x => x.Color1))
+                    {
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" name="filtercolor" class="custom-control-input" id="color-@ProductColors.Id" value="@ProductColors.Color1">
+                            <label class="custom-control-label" for="color-@ProductColors.Id">@ProductColors.Color1</label>
+                        </div>
+                    }
+
+                    @*</form>*@
+                </div>
+                <!-- Color End -->
+                <!-- Size Start -->
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Bedene Göre Filtrele</span></h5>
+                <div class="bg-light p-4 mb-30">
+                    @*<form method="get">*@
+                    @foreach (var ProductSizes in _ids.SizeService.GetAll().OrderBy(x => x.Size1))
+                    {
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" name="filtersize" class="custom-control-input" id="size-@ProductSizes.Id" value="@ProductSizes.Size1">
+                            <label class="custom-control-label" for="size-@ProductSizes.Id">@ProductSizes.Size1</label>
+                        </div>
+                    }
+
+
+                    @*</form>*@
+                </div>
+                <button type="submit" @*id="Filter"*@ class="btn btn-success">Filtrele</button>
+            </form>
+
+            <!-- Size End -->
+        </div>
+        <!-- Shop Sidebar End -->
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-8">
+            <div class="row pb-3">
+                <div class="col-12 pb-1">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        @*<div>
+                        <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
+                        <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
+                        </div>*@
+                        <div class="ml-2">
+                            <div class="btn-group">
+                                <form method="get">
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sıralama</button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <button type="submit" class="dropdown-item">Ucuzdan Pahalıya</button>
+                                        <button type="submit" class="dropdown-item">Pahalıdan Ucuza</button>
+                                    </div>
+                                </form>
+                            </div>
+                            @*<div class="btn-group ml-2">
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Gösterim</button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">10</a>
+                            <a class="dropdown-item" href="#">20</a>
+                            <a class="dropdown-item" href="#">30</a>
+                            </div>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="panel">
+                    @foreach (var Products in Model)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                        <div class="product-item bg-light mb-4">
+                            <div class="product-img position-relative overflow-hidden">
+                                <img class="img-fluid w-100" src="/images/@_ids.ProductImageService.GetAll(x => x.ProductId == Products.Id).Select(y => y.ProductImagePath).FirstOrDefault()" alt="">
+                                <div class="product-action">
+                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                    <a class="btn btn-outline-dark btn-square" href="/urun/urunadi/@Products.Id"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-center py-4">
+                                <a class="h6 text-decoration-none text-truncate" href=""> @Products.ProductName </a>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <h5> @Products.ProductPrice ₺ </h5>@*<h6 class="text-muted ml-2"><del>$123.00</del></h6>*@
+                                </div>
+                                @*<div class="d-flex align-items-center justify-content-center mb-1">
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small>(99)</small>
+                            </div>*@
+                            </div>
+                        </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-12">
+                    <nav>
+                        @Html.PagedListPager(Model, Sayfa => Url.Action("Product", new { Sayfa = Sayfa }), new PagedListRenderOptions()
+                        {
+                        ActiveLiElementClass = "active",
+                        PageClasses = new[]{ "page-link"},
+                        LiElementClasses=new[] { "page-item" },
+                        UlElementClasses = new[] { "pagination","justify-content-center" },
+                        LinkToNextPageFormat = "Sonraki",
+                        LinkToPreviousPageFormat = "Önceki",
+                        MaximumPageNumbersToDisplay = 3,
+                        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                        DisplayLinkToNextPage = PagedListDisplayMode.Always
+                        })
+                    </nav>
+                </div>
+
+                @*<div class="col-12">
+                <nav>
+                <ul class="pagination justify-content-center">
+                <li class="page-item disabled"><a class="page-link" href="#">Önceki</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Sonraki</a></li>
+                </ul>
+                </nav>
+                </div>*@
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+    <!-- Shop End -->
+</div>
